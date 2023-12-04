@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="NFCSampleSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kfB-VX-VD4">
+                                <rect key="frame" x="16" y="123" width="361" height="48"/>
+                                <color key="backgroundColor" red="0.0" green="0.6588235294" blue="0.4941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Bt1-52-T7E"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="QR → NFC">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tvc-Ux-Pgf">
+                                <rect key="frame" x="16" y="203" width="361" height="48"/>
+                                <color key="backgroundColor" red="0.0" green="0.6588235294" blue="0.4941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="EZ4-Hc-PPX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="MRZ → NFC">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="81v-Zg-NhR">
+                                <rect key="frame" x="16" y="283" width="361" height="48"/>
+                                <color key="backgroundColor" red="0.0" green="0.6588235294" blue="0.4941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="cz6-d0-f5a"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Only NFC">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVV-dV-c92">
+                                <rect key="frame" x="16" y="363" width="361" height="48"/>
+                                <color key="backgroundColor" red="0.0" green="0.6588235294" blue="0.4941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="040-yN-tKu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Only NFC Without UI">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="81v-Zg-NhR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="0Dw-R5-yAh"/>
+                            <constraint firstItem="aVV-dV-c92" firstAttribute="top" secondItem="81v-Zg-NhR" secondAttribute="bottom" constant="32" id="6tF-Dh-7je"/>
+                            <constraint firstItem="kfB-VX-VD4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="64" id="7tn-4o-ntu"/>
+                            <constraint firstItem="81v-Zg-NhR" firstAttribute="top" secondItem="tvc-Ux-Pgf" secondAttribute="bottom" constant="32" id="IL6-pK-o6y"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tvc-Ux-Pgf" secondAttribute="trailing" constant="16" id="Ngt-MN-xcc"/>
+                            <constraint firstItem="aVV-dV-c92" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="cPn-na-bDN"/>
+                            <constraint firstItem="kfB-VX-VD4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="hLJ-IY-JAq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="81v-Zg-NhR" secondAttribute="trailing" constant="16" id="hiR-qe-mq0"/>
+                            <constraint firstItem="tvc-Ux-Pgf" firstAttribute="top" secondItem="kfB-VX-VD4" secondAttribute="bottom" constant="32" id="koP-V5-c0x"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aVV-dV-c92" secondAttribute="trailing" constant="16" id="lyV-sF-NNd"/>
+                            <constraint firstItem="tvc-Ux-Pgf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="myy-3d-E5E"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kfB-VX-VD4" secondAttribute="trailing" constant="16" id="rsf-09-4zM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buttonStart_MRZ_NFC" destination="tvc-Ux-Pgf" id="3mD-p0-ODQ"/>
+                        <outlet property="buttonStart_Only_NFC" destination="81v-Zg-NhR" id="UzM-i0-zVX"/>
+                        <outlet property="buttonStart_Only_NFC_WithoutUI" destination="aVV-dV-c92" id="c5a-Kg-EGg"/>
+                        <outlet property="buttonStart_QR_NFC" destination="kfB-VX-VD4" id="Fi4-tx-YNi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="109" y="4"/>
+        </scene>
+        <!--Result Ekyc View Controller-->
+        <scene sceneID="mEf-hh-o8o">
+            <objects>
+                <viewController storyboardIdentifier="ResultEkyc" id="Ok6-DA-pmA" customClass="ResultEkycViewController" customModule="NFCSampleSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="es1-bd-d72"/>
+                        <viewControllerLayoutGuide type="bottom" id="fGx-MD-H8a"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JeB-Rj-z1W">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pwa-Ph-pxp">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="uwG-zk-61Y"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pwa-Ph-pxp" firstAttribute="leading" secondItem="JeB-Rj-z1W" secondAttribute="leading" id="APe-dN-k0O"/>
+                            <constraint firstAttribute="trailing" secondItem="pwa-Ph-pxp" secondAttribute="trailing" id="FzC-gi-PcZ"/>
+                            <constraint firstItem="fGx-MD-H8a" firstAttribute="top" secondItem="pwa-Ph-pxp" secondAttribute="bottom" id="JZh-bN-u9f"/>
+                            <constraint firstItem="pwa-Ph-pxp" firstAttribute="top" secondItem="es1-bd-d72" secondAttribute="bottom" id="Xac-Cw-18w"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableViewResult" destination="pwa-Ph-pxp" id="kpu-iq-Zod"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ke5-bG-osT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1118" y="4"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
