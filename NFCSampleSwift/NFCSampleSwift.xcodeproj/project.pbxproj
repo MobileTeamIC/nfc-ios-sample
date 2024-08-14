@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,8 +11,6 @@
 		1139EB572A8F835800E8BD1A /* ICNFCCardReader.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1139EB502A8F835100E8BD1A /* ICNFCCardReader.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1139EB582A8F835900E8BD1A /* OpenSSL.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1139EB512A8F835100E8BD1A /* OpenSSL.xcframework */; };
 		1139EB592A8F835900E8BD1A /* OpenSSL.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1139EB512A8F835100E8BD1A /* OpenSSL.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1139EB5A2A8F835B00E8BD1A /* SwiftyTesseract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1139EB522A8F835100E8BD1A /* SwiftyTesseract.framework */; };
-		1139EB5B2A8F835B00E8BD1A /* SwiftyTesseract.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1139EB522A8F835100E8BD1A /* SwiftyTesseract.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		115F30AA2A3C488F0060C30D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115F30A92A3C488F0060C30D /* AppDelegate.swift */; };
 		115F30AE2A3C488F0060C30D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115F30AD2A3C488F0060C30D /* ViewController.swift */; };
 		115F30B12A3C488F0060C30D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 115F30AF2A3C488F0060C30D /* Main.storyboard */; };
@@ -53,7 +51,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				1139EB592A8F835900E8BD1A /* OpenSSL.xcframework in Embed Frameworks */,
-				1139EB5B2A8F835B00E8BD1A /* SwiftyTesseract.framework in Embed Frameworks */,
 				1139EB572A8F835800E8BD1A /* ICNFCCardReader.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -63,8 +60,7 @@
 
 /* Begin PBXFileReference section */
 		1139EB502A8F835100E8BD1A /* ICNFCCardReader.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = ICNFCCardReader.xcframework; sourceTree = "<group>"; };
-		1139EB512A8F835100E8BD1A /* OpenSSL.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = OpenSSL.xcframework; sourceTree = "<group>"; };
-		1139EB522A8F835100E8BD1A /* SwiftyTesseract.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftyTesseract.framework; sourceTree = "<group>"; };
+		1139EB512A8F835100E8BD1A /* OpenSSL.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:67RAULRX93:Marcin Krzyzanowski"; lastKnownFileType = wrapper.xcframework; path = OpenSSL.xcframework; sourceTree = "<group>"; };
 		115F30A62A3C488F0060C30D /* NFCSampleSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NFCSampleSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		115F30A92A3C488F0060C30D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		115F30AD2A3C488F0060C30D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -91,7 +87,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1139EB582A8F835900E8BD1A /* OpenSSL.xcframework in Frameworks */,
-				1139EB5A2A8F835B00E8BD1A /* SwiftyTesseract.framework in Frameworks */,
 				1139EB562A8F835800E8BD1A /* ICNFCCardReader.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,7 +166,6 @@
 			children = (
 				1139EB502A8F835100E8BD1A /* ICNFCCardReader.xcframework */,
 				1139EB512A8F835100E8BD1A /* OpenSSL.xcframework */,
-				1139EB522A8F835100E8BD1A /* SwiftyTesseract.framework */,
 			);
 			path = Sdks;
 			sourceTree = "<group>";

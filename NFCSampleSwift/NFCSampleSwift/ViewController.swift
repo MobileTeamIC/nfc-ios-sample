@@ -50,13 +50,6 @@ class ViewController: UIViewController {
         self.buttonStart_Only_NFC_WithoutUI.layer.cornerRadius = 6
         self.buttonStart_Only_NFC_WithoutUI.addTarget(self, action: #selector(self.actionStart_Only_NFC_WithoutUI), for: .touchUpInside)
         
-        
-        // Nhập thông tin bộ mã truy cập.
-        // Lấy tại mục Quản lý Token https://ekyc.vnpt.vn/admin-dashboard/console/project-manager
-        ICNFCSaveData.shared().sdTokenId = ""
-        ICNFCSaveData.shared().sdTokenKey = ""
-        ICNFCSaveData.shared().sdAuthorization = ""
-        
         // Hiển thị LOG khi thực hiện SDK
         ICNFCSaveData.shared().isPrintLogRequest = true
     }
@@ -99,6 +92,18 @@ class ViewController: UIViewController {
             // Đặt giá trị DELEGATE để nhận kết quả trả về
             objICMainNFCReader.icMainNFCDelegate = self
             
+            // Nhập thông tin bộ mã truy cập.
+            // Lấy tại mục Quản lý Token https://ekyc.vnpt.vn/admin-dashboard/console/project-manager
+            // Bộ token của NFC
+            objICMainNFCReader.accessToken = ""
+            objICMainNFCReader.tokenId = ""
+            objICMainNFCReader.tokenKey = ""
+            
+            // Bộ token của eKYC (dùng để upload ảnh)
+            objICMainNFCReader.accessTokenEKYC = ""
+            objICMainNFCReader.tokenIdEKYC = ""
+            objICMainNFCReader.tokenKeyEKYC = ""
+            
             // Giá trị này xác định ngôn ngữ được sử dụng trong SDK.
             // - icnfc_vi: Tiếng Việt
             // - icnfc_en: Tiếng Anh
@@ -132,12 +137,7 @@ class ViewController: UIViewController {
             // Thông tin mã Quê quán tại ICNFCSaveData.shared().postcodePlaceOfOriginResult
             // Thông tin mã Nơi thường trú tại ICNFCSaveData.shared().postcodePlaceOfResidenceResult
             objICMainNFCReader.isGetPostcodeMatching = false
-            
-            // bật tính năng xác minh thông tin thẻ với C06 Bộ công an. lấy giá trị tại ICNFCSaveData.shared().verifyNFCCardResult
-            objICMainNFCReader.isEnableVerifyChipC06 = false
-            
-            // bật hoặc tắt tính năng Call Service. Mặc định false (Thực hiện bật chức năng Call Service)
-            objICMainNFCReader.isTurnOffCallService = false
+
             
             // Giá trị này được truyền vào để xác định nhiều luồng giao dịch trong một phiên. Mặc định ""
             // Ví dụ sau khi Khách hàng thực hiện eKYC => sẽ sinh ra 01 ClientSession
@@ -161,7 +161,6 @@ class ViewController: UIViewController {
             objICMainNFCReader.isEnableCheckChipClone = true
             
             
-            
             /*========== CÁC THUỘC TÍNH VỀ MÔI TRƯỜNG PHÁT TRIỂN - URL TÁC VỤ TRONG SDK ==========*/
             
             // Giá trị tên miền chính của SDK. Mặc định ""
@@ -176,54 +175,52 @@ class ViewController: UIViewController {
             // Đường dẫn đầy đủ thực hiện kiểm tra mã bưu chính của thông tin giấy tờ như Quê quán, Nơi thường trú. Mặc định ""
             // objICMainNFCReader.urlMatchingPostcode = ""
             
-            // Thông tin KEY truyền vào Header. Mặc định ""
-            // objICMainNFCReader.keyHeaderRequest = ""
-            
-            // Thông tin VALUE truyền vào Header. Mặc định ""
-            // objICMainNFCReader.valueHeaderRequest = ""
-            
+            // Thông tin [KEY: VALUE] truyền vào Header. Mặc định []
+            // objICMainNFCReader.headersRequest = ["ABC": "XYZ"]
             
             
             /*========== CÁC THUỘC TÍNH VỀ CÀI ĐẶT MÀU SẮC GIAO DIỆN TRONG SDK ==========*/
             
-            // Thanh header: PA 1 nút đóng bên phải. PA 2 nút đóng bên trái. mặc định là PA 1
-            // objICMainNFCReader.styleHeader = 1
-            
-            // màu nền Thanh header. mặc định là trong suốt
-            // objICMainNFCReader.colorBackgroundHeader = UIColor.clear
+            // 1. Thanh header: PA 1 nút đóng bên trái (LeftButton). PA 2 nút đóng bên phải (RightButton). mặc định là PA 1 (LeftButton)
+            // objICMainNFCReader.modeButtonHeaderBar = LeftButton
             
             // 2. Màu nội dung thanh header (Màu chữ và màu nút đóng). mặc định là FFFFFF
-            // objICMainNFCReader.colorContentHeader = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
+            // objICMainNFCReader.contentColorHeaderBar = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
             
-            // 3. Màu văn bản chính, Tiêu đề & Văn bản phụ (màu text ở màn Hướng dẫn, ở các màn Quét MRZ, QR, NFC). mặc định là FFFFFF
-            // objICMainNFCReader.colorContentMain = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
+            // 3. màu nền Thanh header. mặc định là trong suốt
+            // objICMainNFCReader.backgroundColorHeaderBar = UIColor.clear
             
-            // 4. Màu nền (bao gồm màu nền Hướng dẫn, màu nền lúc quét NFC). mặc định 142730
-            // objICMainNFCReader.colorBackgroundMain = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
+            // 4. Màu văn bản chính, Tiêu đề & Văn bản phụ (màu text ở màn Hướng dẫn, ở các màn Quét MRZ, QR, NFC). mặc định là FFFFFF
+            // objICMainNFCReader.textColorContentMain = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
             
-            // Đường line trên hướng dẫn chụp GTTT. mặc định D9D9D9
-            // objICMainNFCReader.colorLine = self.UIColorFromRGB(rgbValue: 0xD9D9D9, alpha: 1.0)
+            // 5. Màu nền (bao gồm màu nền Hướng dẫn, màu nền lúc quét NFC). mặc định 122F41
+            // objICMainNFCReader.backgroundColorMainScreen = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
             
-            // 6. Màu nút bấm (bao gồm nút Tôi đã hiểu, Hướng dẫn, Quét lại (riêng iOS)). mặc định là FFFFFF
-            // objICMainNFCReader.colorBackgroundButton = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
+            // 6. Đường line trên hướng dẫn chụp GTTT, bao gồm cả các popup cảnh báo. mặc định E8E8E8
+            // objICMainNFCReader.backgroundColorLine = self.UIColorFromRGB(rgbValue: 0xD9D9D9, alpha: 1.0)
             
-            // 7. Màu text của nút bấm (bao gồm nút Tôi đã hiểu, Quét lại (riêng iOS)) và thanh hướng dẫn khi đưa mặt vào khung oval. mặc định 142730
-            // objICMainNFCReader.colorTitleButton = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
+            // 7. Màu nút bấm (bao gồm nút Tôi đã hiểu, Hướng dẫn, Quét lại (riêng iOS)). mặc định là FFFFFF
+            // objICMainNFCReader.backgroundColorButton = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
             
-            // Màu nền chụp (màu nền quét QR, MRZ). mặc định 142730
-            // objICMainNFCReader.colorBackgroundCapture = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
+            // 8. Màu text của nút bấm (bao gồm nút Tôi đã hiểu, Quét lại (riêng iOS)). mặc định 142730
+            // objICMainNFCReader.textColorTitleButton = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
             
-            // 9. Màu hiệu ứng Bình thường (màu animation QR, ĐỌc thẻ chip NFC, màu thanh chạy ở màn NFC, màu nút Hướng dẫn). mặc định 18D696
-            // objICMainNFCReader.colorEffectAnimation = self.UIColorFromRGB(rgbValue: 0x18D696, alpha: 1.0)
+            // 9. Màu nền chụp (màu nền quét QR, MRZ). mặc định 142730
+            // objICMainNFCReader.backgroundColorCapture = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
             
-            // 10. Màu hiệu ứng thất bại (khi xảy ra lỗi Quét NFC). mặc định CA2A2A
-            // objICMainNFCReader.colorEffectAnimationFailed = self.UIColorFromRGB(rgbValue: 0xCA2A2A, alpha: 1.0)
+            // 10. Màu hiệu ứng Bình thường (màu animation QR, ĐỌc thẻ chip NFC, màu thanh chạy ở màn NFC, màu nút Hướng dẫn). mặc định 18D696
+            // objICMainNFCReader.effectColorAnimation = self.UIColorFromRGB(rgbValue: 0x18D696, alpha: 1.0)
             
-            // Hiển thị Họa tiết dưới nền. Mặc định false
-            // objICMainNFCReader.isUsingPatternUnderBackground = false
+            // 11. Màu hiệu ứng thất bại (khi xảy ra lỗi Quét NFC)
+            // objICMainNFCReader.effectColorAnimationFailed = self.UIColorFromRGB(rgbValue: 0xCA2A2A, alpha: 1.0)
             
-            // màu Họa tiết dưới nền. mặc định 18D696
-            // objICMainNFCReader.colorPatternUnderBackgound = self.UIColorFromRGB(rgbValue: 0x18D696, alpha: 1.0)
+            // 12. Màu nền cho popup. Mặc định FFFFFF
+            // objICMainNFCReader.backgroundColorPopup = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
+            
+            // 13. Màu văn bản trên popup. Mặc định 142730
+            // objICMainNFCReader.textColorContentPopup = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
+            
+            /*========== CÁC THUỘC TÍNH VỀ TRADEMARK ==========*/
             
             // Hiển thị ảnh thương hiệu ở góc dưới màn hình. Mặc định false
             // objICMainNFCReader.isShowTrademark = true
@@ -231,22 +228,25 @@ class ViewController: UIViewController {
             // Ảnh thương hiệu hiển thị cuối màn hình.
             // objICMainNFCReader.imageTrademark = UIImage()
             
-            // 15. Kích thước Logo (phần này cần bổ sung giới hạn chiều rộng và chiều cao). Kích thước logo mặc định NAx24
+            // Kích thước Logo (phần này cần bổ sung giới hạn chiều rộng và chiều cao). Kích thước logo mặc định NAx24
             // objICMainNFCReader.sizeImageTrademark = CGSize(width: 100.0, height: 24.0)
-            
-            // Màu nền cho popup. Mặc định FFFFFF
-            // objICMainNFCReader.colorBackgroundPopup = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
-            
-            // Màu văn bản trên popup. Mặc định 142730
-            // objICMainNFCReader.colorTextPopup = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
-            
             
             /*========== CHỈNH SỬA TÊN CÁC TỆP TIN HIỆU ỨNG - VIDEO HƯỚNG DẪN ==========*/
             
+            // text hiển thị khi đang đợi đặt thẻ
+            // objICMainNFCReader.textReadyNFC = "Bạn vui lòng chạm CCCD vào vùng đọc NFC của thiết bị như hướng dẫn"
+            
+            // text hiển thị khi xác định được thẻ*/
+            // objICMainNFCReader.textDetectedNFC = "Xác thực bằng CCCD gắn chíp....."
+            
+            // text hiển thị khi đang đọc thẻ*/
+            // objICMainNFCReader.textScanningNFC = "Đang thực hiện đọc dữ liệu CCCD\nGiữ nguyên thẻ CCCD với thiết bị"
+            
+            // text hiện khi đọc thẻ thành công*/
+            // objICMainNFCReader.textFinishNFC = "Đọc thông tin thẻ CCCD thành công"
+            
             // Tên VIDEO hướng dẫn quét NFC. Mặc định "" (sử dụng VIDEO mặc định khi truyền giá trị rỗng hoặc không truyền)
-            objICMainNFCReader.nameVideoHelpNFC = ""
-            
-            
+            // objICMainNFCReader.nameVideoHelpNFC = ""
             
             objICMainNFCReader.modalPresentationStyle = .fullScreen
             objICMainNFCReader.modalTransitionStyle = .coverVertical
@@ -267,6 +267,18 @@ class ViewController: UIViewController {
             
             // Đặt giá trị DELEGATE để nhận kết quả trả về
             objICMainNFCReader.icMainNFCDelegate = self
+            
+            // Nhập thông tin bộ mã truy cập.
+            // Lấy tại mục Quản lý Token https://ekyc.vnpt.vn/admin-dashboard/console/project-manager
+            // Bộ token của NFC
+            objICMainNFCReader.accessToken = ""
+            objICMainNFCReader.tokenId = ""
+            objICMainNFCReader.tokenKey = ""
+            
+            // Bộ token của eKYC (dùng để upload ảnh)
+            objICMainNFCReader.accessTokenEKYC = ""
+            objICMainNFCReader.tokenIdEKYC = ""
+            objICMainNFCReader.tokenKeyEKYC = ""
             
             // Giá trị này xác định ngôn ngữ được sử dụng trong SDK.
             // - icnfc_vi: Tiếng Việt
@@ -302,12 +314,6 @@ class ViewController: UIViewController {
             // Thông tin mã Nơi thường trú tại ICNFCSaveData.shared().postcodePlaceOfResidenceResult
             objICMainNFCReader.isGetPostcodeMatching = false
             
-            // bật tính năng xác minh thông tin thẻ với C06 Bộ công an. lấy giá trị tại ICNFCSaveData.shared().verifyNFCCardResult
-            objICMainNFCReader.isEnableVerifyChipC06 = false
-            
-            // bật hoặc tắt tính năng Call Service. Mặc định false (Thực hiện bật chức năng Call Service)
-            objICMainNFCReader.isTurnOffCallService = false
-            
             // Giá trị này được truyền vào để xác định nhiều luồng giao dịch trong một phiên. Mặc định ""
             // Ví dụ sau khi Khách hàng thực hiện eKYC => sẽ sinh ra 01 ClientSession
             // Khách hàng sẽ truyền ClientSession vào giá trị này => khi đó eKYC và NFC sẽ có chung ClientSession
@@ -345,54 +351,52 @@ class ViewController: UIViewController {
             // Đường dẫn đầy đủ thực hiện kiểm tra mã bưu chính của thông tin giấy tờ như Quê quán, Nơi thường trú. Mặc định ""
             // objICMainNFCReader.urlMatchingPostcode = ""
             
-            // Thông tin KEY truyền vào Header. Mặc định ""
-            // objICMainNFCReader.keyHeaderRequest = ""
-            
-            // Thông tin VALUE truyền vào Header. Mặc định ""
-            // objICMainNFCReader.valueHeaderRequest = ""
-            
+            // Thông tin [KEY: VALUE] truyền vào Header. Mặc định []
+            // objICMainNFCReader.headersRequest = ["ABC": "XYZ"]
             
             
             /*========== CÁC THUỘC TÍNH VỀ CÀI ĐẶT MÀU SẮC GIAO DIỆN TRONG SDK ==========*/
             
-            // Thanh header: PA 1 nút đóng bên phải. PA 2 nút đóng bên trái. mặc định là PA 1
-            // objICMainNFCReader.styleHeader = 1
-            
-            // màu nền Thanh header. mặc định là trong suốt
-            // objICMainNFCReader.colorBackgroundHeader = UIColor.clear
+            // 1. Thanh header: PA 1 nút đóng bên trái (LeftButton). PA 2 nút đóng bên phải (RightButton). mặc định là PA 1 (LeftButton)
+            // objICMainNFCReader.modeButtonHeaderBar = LeftButton
             
             // 2. Màu nội dung thanh header (Màu chữ và màu nút đóng). mặc định là FFFFFF
-            // objICMainNFCReader.colorContentHeader = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
+            // objICMainNFCReader.contentColorHeaderBar = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
             
-            // 3. Màu văn bản chính, Tiêu đề & Văn bản phụ (màu text ở màn Hướng dẫn, ở các màn Quét MRZ, QR, NFC). mặc định là FFFFFF
-            // objICMainNFCReader.colorContentMain = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
+            // 3. màu nền Thanh header. mặc định là trong suốt
+            // objICMainNFCReader.backgroundColorHeaderBar = UIColor.clear
             
-            // 4. Màu nền (bao gồm màu nền Hướng dẫn, màu nền lúc quét NFC). mặc định 142730
-            // objICMainNFCReader.colorBackgroundMain = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
+            // 4. Màu văn bản chính, Tiêu đề & Văn bản phụ (màu text ở màn Hướng dẫn, ở các màn Quét MRZ, QR, NFC). mặc định là FFFFFF
+            // objICMainNFCReader.textColorContentMain = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
             
-            // Đường line trên hướng dẫn chụp GTTT. mặc định D9D9D9
-            // objICMainNFCReader.colorLine = self.UIColorFromRGB(rgbValue: 0xD9D9D9, alpha: 1.0)
+            // 5. Màu nền (bao gồm màu nền Hướng dẫn, màu nền lúc quét NFC). mặc định 122F41
+            // objICMainNFCReader.backgroundColorMainScreen = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
             
-            // 6. Màu nút bấm (bao gồm nút Tôi đã hiểu, Hướng dẫn, Quét lại (riêng iOS)). mặc định là FFFFFF
-            // objICMainNFCReader.colorBackgroundButton = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
+            // 6. Đường line trên hướng dẫn chụp GTTT, bao gồm cả các popup cảnh báo. mặc định E8E8E8
+            // objICMainNFCReader.backgroundColorLine = self.UIColorFromRGB(rgbValue: 0xD9D9D9, alpha: 1.0)
             
-            // 7. Màu text của nút bấm (bao gồm nút Tôi đã hiểu, Quét lại (riêng iOS)) và thanh hướng dẫn khi đưa mặt vào khung oval. mặc định 142730
-            // objICMainNFCReader.colorTitleButton = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
+            // 7. Màu nút bấm (bao gồm nút Tôi đã hiểu, Hướng dẫn, Quét lại (riêng iOS)). mặc định là FFFFFF
+            // objICMainNFCReader.backgroundColorButton = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
             
-            // Màu nền chụp (màu nền quét QR, MRZ). mặc định 142730
-            // objICMainNFCReader.colorBackgroundCapture = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
+            // 8. Màu text của nút bấm (bao gồm nút Tôi đã hiểu, Quét lại (riêng iOS)). mặc định 142730
+            // objICMainNFCReader.textColorTitleButton = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
             
-            // 9. Màu hiệu ứng Bình thường (màu animation QR, ĐỌc thẻ chip NFC, màu thanh chạy ở màn NFC, màu nút Hướng dẫn). mặc định 18D696
-            // objICMainNFCReader.colorEffectAnimation = self.UIColorFromRGB(rgbValue: 0x18D696, alpha: 1.0)
+            // 9. Màu nền chụp (màu nền quét QR, MRZ). mặc định 142730
+            // objICMainNFCReader.backgroundColorCapture = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
             
-            // 10. Màu hiệu ứng thất bại (khi xảy ra lỗi Quét NFC). mặc định CA2A2A
-            // objICMainNFCReader.colorEffectAnimationFailed = self.UIColorFromRGB(rgbValue: 0xCA2A2A, alpha: 1.0)
+            // 10. Màu hiệu ứng Bình thường (màu animation QR, ĐỌc thẻ chip NFC, màu thanh chạy ở màn NFC, màu nút Hướng dẫn). mặc định 18D696
+            // objICMainNFCReader.effectColorAnimation = self.UIColorFromRGB(rgbValue: 0x18D696, alpha: 1.0)
             
-            // Hiển thị Họa tiết dưới nền. Mặc định false
-            // objICMainNFCReader.isUsingPatternUnderBackground = false
+            // 11. Màu hiệu ứng thất bại (khi xảy ra lỗi Quét NFC)
+            // objICMainNFCReader.effectColorAnimationFailed = self.UIColorFromRGB(rgbValue: 0xCA2A2A, alpha: 1.0)
             
-            // màu Họa tiết dưới nền. mặc định 18D696
-            // objICMainNFCReader.colorPatternUnderBackgound = self.UIColorFromRGB(rgbValue: 0x18D696, alpha: 1.0)
+            // 12. Màu nền cho popup. Mặc định FFFFFF
+            // objICMainNFCReader.backgroundColorPopup = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
+            
+            // 13. Màu văn bản trên popup. Mặc định 142730
+            // objICMainNFCReader.textColorContentPopup = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
+            
+            /*========== CÁC THUỘC TÍNH VỀ TRADEMARK ==========*/
             
             // Hiển thị ảnh thương hiệu ở góc dưới màn hình. Mặc định false
             // objICMainNFCReader.isShowTrademark = true
@@ -400,22 +404,25 @@ class ViewController: UIViewController {
             // Ảnh thương hiệu hiển thị cuối màn hình.
             // objICMainNFCReader.imageTrademark = UIImage()
             
-            // 15. Kích thước Logo (phần này cần bổ sung giới hạn chiều rộng và chiều cao). Kích thước logo mặc định NAx24
+            // Kích thước Logo (phần này cần bổ sung giới hạn chiều rộng và chiều cao). Kích thước logo mặc định NAx24
             // objICMainNFCReader.sizeImageTrademark = CGSize(width: 100.0, height: 24.0)
-            
-            // Màu nền cho popup. Mặc định FFFFFF
-            // objICMainNFCReader.colorBackgroundPopup = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
-            
-            // Màu văn bản trên popup. Mặc định 142730
-            // objICMainNFCReader.colorTextPopup = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
-            
             
             /*========== CHỈNH SỬA TÊN CÁC TỆP TIN HIỆU ỨNG - VIDEO HƯỚNG DẪN ==========*/
             
+            // text hiển thị khi đang đợi đặt thẻ
+            // objICMainNFCReader.textReadyNFC = "Bạn vui lòng chạm CCCD vào vùng đọc NFC của thiết bị như hướng dẫn"
+            
+            // text hiển thị khi xác định được thẻ*/
+            // objICMainNFCReader.textDetectedNFC = "Xác thực bằng CCCD gắn chíp....."
+            
+            // text hiển thị khi đang đọc thẻ*/
+            // objICMainNFCReader.textScanningNFC = "Đang thực hiện đọc dữ liệu CCCD\nGiữ nguyên thẻ CCCD với thiết bị"
+            
+            // text hiện khi đọc thẻ thành công*/
+            // objICMainNFCReader.textFinishNFC = "Đọc thông tin thẻ CCCD thành công"
+            
             // Tên VIDEO hướng dẫn quét NFC. Mặc định "" (sử dụng VIDEO mặc định khi truyền giá trị rỗng hoặc không truyền)
-            objICMainNFCReader.nameVideoHelpNFC = ""
-            
-            
+            // objICMainNFCReader.nameVideoHelpNFC = ""
             
             objICMainNFCReader.modalPresentationStyle = .fullScreen
             objICMainNFCReader.modalTransitionStyle = .coverVertical
@@ -454,6 +461,18 @@ class ViewController: UIViewController {
             // Bật chức năng hiển thị nút bấm "Bỏ qua hướng dẫn".
             objICMainNFCReader.isEnableGotIt = true
             
+            // Nhập thông tin bộ mã truy cập.
+            // Lấy tại mục Quản lý Token https://ekyc.vnpt.vn/admin-dashboard/console/project-manager
+            // Bộ token của NFC
+            objICMainNFCReader.accessToken = ""
+            objICMainNFCReader.tokenId = ""
+            objICMainNFCReader.tokenKey = ""
+            
+            // Bộ token của eKYC (dùng để upload ảnh)
+            objICMainNFCReader.accessTokenEKYC = ""
+            objICMainNFCReader.tokenIdEKYC = ""
+            objICMainNFCReader.tokenKeyEKYC = ""
+            
             // Thuộc tính quy định việc đọc thông tin NFC
             // - QRCode: Quét mã QR sau đó đọc thông tin thẻ Chip NFC
             // - MRZCode: Quét mã MRZ sau đó đọc thông tin thẻ Chip NFC
@@ -475,12 +494,6 @@ class ViewController: UIViewController {
             // Thông tin mã Quê quán tại ICNFCSaveData.shared().postcodePlaceOfOriginResult
             // Thông tin mã Nơi thường trú tại ICNFCSaveData.shared().postcodePlaceOfResidenceResult
             objICMainNFCReader.isGetPostcodeMatching = false
-            
-            // bật tính năng xác minh thông tin thẻ với C06 Bộ công an. lấy giá trị tại ICNFCSaveData.shared().verifyNFCCardResult
-            objICMainNFCReader.isEnableVerifyChipC06 = false
-            
-            // bật hoặc tắt tính năng Call Service. Mặc định false (Thực hiện bật chức năng Call Service)
-            objICMainNFCReader.isTurnOffCallService = false
             
             // Giá trị này được truyền vào để xác định nhiều luồng giao dịch trong một phiên. Mặc định ""
             // Ví dụ sau khi Khách hàng thực hiện eKYC => sẽ sinh ra 01 ClientSession
@@ -519,54 +532,52 @@ class ViewController: UIViewController {
             // Đường dẫn đầy đủ thực hiện kiểm tra mã bưu chính của thông tin giấy tờ như Quê quán, Nơi thường trú. Mặc định ""
             // objICMainNFCReader.urlMatchingPostcode = ""
             
-            // Thông tin KEY truyền vào Header. Mặc định ""
-            // objICMainNFCReader.keyHeaderRequest = ""
-            
-            // Thông tin VALUE truyền vào Header. Mặc định ""
-            // objICMainNFCReader.valueHeaderRequest = ""
-            
+            // Thông tin [KEY: VALUE] truyền vào Header. Mặc định []
+            // objICMainNFCReader.headersRequest = ["ABC": "XYZ"]
             
             
             /*========== CÁC THUỘC TÍNH VỀ CÀI ĐẶT MÀU SẮC GIAO DIỆN TRONG SDK ==========*/
             
-            // Thanh header: PA 1 nút đóng bên phải. PA 2 nút đóng bên trái. mặc định là PA 1
-            // objICMainNFCReader.styleHeader = 1
-            
-            // màu nền Thanh header. mặc định là trong suốt
-            // objICMainNFCReader.colorBackgroundHeader = UIColor.clear
+            // 1. Thanh header: PA 1 nút đóng bên trái (LeftButton). PA 2 nút đóng bên phải (RightButton). mặc định là PA 1 (LeftButton)
+            // objICMainNFCReader.modeButtonHeaderBar = LeftButton
             
             // 2. Màu nội dung thanh header (Màu chữ và màu nút đóng). mặc định là FFFFFF
-            // objICMainNFCReader.colorContentHeader = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
+            // objICMainNFCReader.contentColorHeaderBar = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
             
-            // 3. Màu văn bản chính, Tiêu đề & Văn bản phụ (màu text ở màn Hướng dẫn, ở các màn Quét MRZ, QR, NFC). mặc định là FFFFFF
-            // objICMainNFCReader.colorContentMain = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
+            // 3. màu nền Thanh header. mặc định là trong suốt
+            // objICMainNFCReader.backgroundColorHeaderBar = UIColor.clear
             
-            // 4. Màu nền (bao gồm màu nền Hướng dẫn, màu nền lúc quét NFC). mặc định 142730
-            // objICMainNFCReader.colorBackgroundMain = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
+            // 4. Màu văn bản chính, Tiêu đề & Văn bản phụ (màu text ở màn Hướng dẫn, ở các màn Quét MRZ, QR, NFC). mặc định là FFFFFF
+            // objICMainNFCReader.textColorContentMain = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
             
-            // Đường line trên hướng dẫn chụp GTTT. mặc định D9D9D9
-            // objICMainNFCReader.colorLine = self.UIColorFromRGB(rgbValue: 0xD9D9D9, alpha: 1.0)
+            // 5. Màu nền (bao gồm màu nền Hướng dẫn, màu nền lúc quét NFC). mặc định 122F41
+            // objICMainNFCReader.backgroundColorMainScreen = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
             
-            // 6. Màu nút bấm (bao gồm nút Tôi đã hiểu, Hướng dẫn, Quét lại (riêng iOS)). mặc định là FFFFFF
-            // objICMainNFCReader.colorBackgroundButton = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
+            // 6. Đường line trên hướng dẫn chụp GTTT, bao gồm cả các popup cảnh báo. mặc định E8E8E8
+            // objICMainNFCReader.backgroundColorLine = self.UIColorFromRGB(rgbValue: 0xD9D9D9, alpha: 1.0)
             
-            // 7. Màu text của nút bấm (bao gồm nút Tôi đã hiểu, Quét lại (riêng iOS)) và thanh hướng dẫn khi đưa mặt vào khung oval. mặc định 142730
-            // objICMainNFCReader.colorTitleButton = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
+            // 7. Màu nút bấm (bao gồm nút Tôi đã hiểu, Hướng dẫn, Quét lại (riêng iOS)). mặc định là FFFFFF
+            // objICMainNFCReader.backgroundColorButton = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
             
-            // Màu nền chụp (màu nền quét QR, MRZ). mặc định 142730
-            // objICMainNFCReader.colorBackgroundCapture = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
+            // 8. Màu text của nút bấm (bao gồm nút Tôi đã hiểu, Quét lại (riêng iOS)). mặc định 142730
+            // objICMainNFCReader.textColorTitleButton = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
             
-            // 9. Màu hiệu ứng Bình thường (màu animation QR, ĐỌc thẻ chip NFC, màu thanh chạy ở màn NFC, màu nút Hướng dẫn). mặc định 18D696
-            // objICMainNFCReader.colorEffectAnimation = self.UIColorFromRGB(rgbValue: 0x18D696, alpha: 1.0)
+            // 9. Màu nền chụp (màu nền quét QR, MRZ). mặc định 142730
+            // objICMainNFCReader.backgroundColorCapture = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
             
-            // 10. Màu hiệu ứng thất bại (khi xảy ra lỗi Quét NFC). mặc định CA2A2A
-            // objICMainNFCReader.colorEffectAnimationFailed = self.UIColorFromRGB(rgbValue: 0xCA2A2A, alpha: 1.0)
+            // 10. Màu hiệu ứng Bình thường (màu animation QR, ĐỌc thẻ chip NFC, màu thanh chạy ở màn NFC, màu nút Hướng dẫn). mặc định 18D696
+            // objICMainNFCReader.effectColorAnimation = self.UIColorFromRGB(rgbValue: 0x18D696, alpha: 1.0)
             
-            // Hiển thị Họa tiết dưới nền. Mặc định false
-            // objICMainNFCReader.isUsingPatternUnderBackground = false
+            // 11. Màu hiệu ứng thất bại (khi xảy ra lỗi Quét NFC)
+            // objICMainNFCReader.effectColorAnimationFailed = self.UIColorFromRGB(rgbValue: 0xCA2A2A, alpha: 1.0)
             
-            // màu Họa tiết dưới nền. mặc định 18D696
-            // objICMainNFCReader.colorPatternUnderBackgound = self.UIColorFromRGB(rgbValue: 0x18D696, alpha: 1.0)
+            // 12. Màu nền cho popup. Mặc định FFFFFF
+            // objICMainNFCReader.backgroundColorPopup = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
+            
+            // 13. Màu văn bản trên popup. Mặc định 142730
+            // objICMainNFCReader.textColorContentPopup = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
+            
+            /*========== CÁC THUỘC TÍNH VỀ TRADEMARK ==========*/
             
             // Hiển thị ảnh thương hiệu ở góc dưới màn hình. Mặc định false
             // objICMainNFCReader.isShowTrademark = true
@@ -574,20 +585,26 @@ class ViewController: UIViewController {
             // Ảnh thương hiệu hiển thị cuối màn hình.
             // objICMainNFCReader.imageTrademark = UIImage()
             
-            // 15. Kích thước Logo (phần này cần bổ sung giới hạn chiều rộng và chiều cao). Kích thước logo mặc định NAx24
+            // Kích thước Logo (phần này cần bổ sung giới hạn chiều rộng và chiều cao). Kích thước logo mặc định NAx24
             // objICMainNFCReader.sizeImageTrademark = CGSize(width: 100.0, height: 24.0)
-            
-            // Màu nền cho popup. Mặc định FFFFFF
-            // objICMainNFCReader.colorBackgroundPopup = self.UIColorFromRGB(rgbValue: 0xFFFFFF, alpha: 1.0)
-            
-            // Màu văn bản trên popup. Mặc định 142730
-            // objICMainNFCReader.colorTextPopup = self.UIColorFromRGB(rgbValue: 0x142730, alpha: 1.0)
-            
             
             /*========== CHỈNH SỬA TÊN CÁC TỆP TIN HIỆU ỨNG - VIDEO HƯỚNG DẪN ==========*/
             
+            // text hiển thị khi đang đợi đặt thẻ
+            // objICMainNFCReader.textReadyNFC = "Bạn vui lòng chạm CCCD vào vùng đọc NFC của thiết bị như hướng dẫn"
+            
+            // text hiển thị khi xác định được thẻ*/
+            // objICMainNFCReader.textDetectedNFC = "Xác thực bằng CCCD gắn chíp....."
+            
+            // text hiển thị khi đang đọc thẻ*/
+            // objICMainNFCReader.textScanningNFC = "Đang thực hiện đọc dữ liệu CCCD\nGiữ nguyên thẻ CCCD với thiết bị"
+            
+            // text hiện khi đọc thẻ thành công*/
+            // objICMainNFCReader.textFinishNFC = "Đọc thông tin thẻ CCCD thành công"
+            
             // Tên VIDEO hướng dẫn quét NFC. Mặc định "" (sử dụng VIDEO mặc định khi truyền giá trị rỗng hoặc không truyền)
-            objICMainNFCReader.nameVideoHelpNFC = ""
+            // objICMainNFCReader.nameVideoHelpNFC = ""
+            
             
             objICMainNFCReader.modalPresentationStyle = .fullScreen
             objICMainNFCReader.modalTransitionStyle = .coverVertical
@@ -614,6 +631,18 @@ class ViewController: UIViewController {
             // Đặt giá trị DELEGATE để nhận kết quả trả về
             objICMainNFCReader.icMainNFCDelegate = self
             
+            // Nhập thông tin bộ mã truy cập.
+            // Lấy tại mục Quản lý Token https://ekyc.vnpt.vn/admin-dashboard/console/project-manager
+            // Bộ token của NFC
+            objICMainNFCReader.accessToken = ""
+            objICMainNFCReader.tokenId = ""
+            objICMainNFCReader.tokenKey = ""
+            
+            // Bộ token của eKYC (dùng để upload ảnh)
+            objICMainNFCReader.accessTokenEKYC = ""
+            objICMainNFCReader.tokenIdEKYC = ""
+            objICMainNFCReader.tokenKeyEKYC = ""
+            
             // Thuộc tính quy định việc đọc thông tin NFC
             // - QRCode: Quét mã QR sau đó đọc thông tin thẻ Chip NFC
             // - MRZCode: Quét mã MRZ sau đó đọc thông tin thẻ Chip NFC
@@ -635,12 +664,6 @@ class ViewController: UIViewController {
             // Thông tin mã Quê quán tại ICNFCSaveData.shared().postcodePlaceOfOriginResult
             // Thông tin mã Nơi thường trú tại ICNFCSaveData.shared().postcodePlaceOfResidenceResult
             objICMainNFCReader.isGetPostcodeMatching = false
-            
-            // bật tính năng xác minh thông tin thẻ với C06 Bộ công an. lấy giá trị tại ICNFCSaveData.shared().verifyNFCCardResult
-            objICMainNFCReader.isEnableVerifyChipC06 = false
-            
-            // bật hoặc tắt tính năng Call Service. Mặc định false (Thực hiện bật chức năng Call Service)
-            objICMainNFCReader.isTurnOffCallService = false
             
             // Giá trị này được truyền vào để xác định nhiều luồng giao dịch trong một phiên. Mặc định ""
             // Ví dụ sau khi Khách hàng thực hiện eKYC => sẽ sinh ra 01 ClientSession
@@ -679,12 +702,22 @@ class ViewController: UIViewController {
             // Đường dẫn đầy đủ thực hiện kiểm tra mã bưu chính của thông tin giấy tờ như Quê quán, Nơi thường trú. Mặc định ""
             // objICMainNFCReader.urlMatchingPostcode = ""
             
-            // Thông tin KEY truyền vào Header. Mặc định ""
-            // objICMainNFCReader.keyHeaderRequest = ""
+            // Thông tin [KEY: VALUE] truyền vào Header. Mặc định []
+            // objICMainNFCReader.headersRequest = ["ABC": "XYZ"]
             
-            // Thông tin VALUE truyền vào Header. Mặc định ""
-            // objICMainNFCReader.valueHeaderRequest = ""
+            /*========== CHỈNH SỬA TÊN CÁC TỆP TIN HIỆU ỨNG - VIDEO HƯỚNG DẪN ==========*/
             
+            // text hiển thị khi đang đợi đặt thẻ
+            // objICMainNFCReader.textReadyNFC = "Bạn vui lòng chạm CCCD vào vùng đọc NFC của thiết bị như hướng dẫn"
+            
+            // text hiển thị khi xác định được thẻ*/
+            // objICMainNFCReader.textDetectedNFC = "Xác thực bằng CCCD gắn chíp....."
+            
+            // text hiển thị khi đang đọc thẻ*/
+            // objICMainNFCReader.textScanningNFC = "Đang thực hiện đọc dữ liệu CCCD\nGiữ nguyên thẻ CCCD với thiết bị"
+            
+            // text hiện khi đọc thẻ thành công*/
+            // objICMainNFCReader.textFinishNFC = "Đọc thông tin thẻ CCCD thành công"
             
             // Thực hiện gọi phương thức đọc thông tin thẻ căn cước gắn chip bằng công nghệ NFC
             objICMainNFCReader.startNFCReaderOutSide()
@@ -698,15 +731,21 @@ class ViewController: UIViewController {
 extension ViewController: ICMainNFCReaderDelegate {
     
     // Phương thức khi người dùng nhấn xác nhận thoát SDK
-    func icNFCMainDismissed() {
-        print("Close")
+    func icNFCMainDismissed(_ lastStep: ICNFCLastStep) {
+        print("close with laststep \(lastStep)")
     }
     
-    // Phương thức trả về
-    func icNFCCardReader(_ state: ICNFCReaderState, progress: Int, error: Error) {
+    // Phương thức khi popup đọc NFC đã đóng
+    func icNFCPopupReaderChipDisappear() {
+        print("Popup đọc đã đóng")
+    }
+    
+    // Phương thức trả trạng thái đọc NFC cùng với lỗi (nếu có)
+    func icNFCCardReader(_ state: ICNFCReaderState, progress: Int, error: String) {
         print("state = \(state)")
     }
     
+    // Phương thức trả về kết quả đọc NFC
     func icNFCCardReaderGetResult() {
         
         // Hiển thị thông tin kết quả QUÉT QR
@@ -718,9 +757,6 @@ extension ViewController: ICMainNFCReaderDelegate {
         // Hiển thị thông tin POSTCODE
         print("postcodePlaceOfOriginResult = \(ICNFCSaveData.shared().postcodePlaceOfOriginResult)")
         print("postcodePlaceOfResidenceResult = \(ICNFCSaveData.shared().postcodePlaceOfResidenceResult)")
-        
-        // Hiển thị thông tin xác thực C06
-        print("verifyNFCCardResult = \(ICNFCSaveData.shared().verifyNFCCardResult)")
         
         // Hiển thị thông tin ảnh chân dung đọc từ thẻ
         print("imageAvatar = \(ICNFCSaveData.shared().imageAvatar)")
@@ -745,9 +781,6 @@ extension ViewController: ICMainNFCReaderDelegate {
             // Thông tin postcode
             viewShowResult.postcodePlaceOfOrigin = ICNFCSaveData.shared().postcodePlaceOfOriginResult
             viewShowResult.postcodePlaceOfResidence = ICNFCSaveData.shared().postcodePlaceOfResidenceResult
-            
-            // Thông tin verify C06
-            viewShowResult.verifyC06Result = ICNFCSaveData.shared().verifyNFCCardResult
             
             // Thông tin ẢNH chân dung
             viewShowResult.imageAvatar = ICNFCSaveData.shared().imageAvatar
