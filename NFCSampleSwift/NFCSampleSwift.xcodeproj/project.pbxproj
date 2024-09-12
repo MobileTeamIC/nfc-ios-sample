@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,6 +24,8 @@
 		115F31352A3C584B0060C30D /* ResultEkycHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 115F31302A3C584B0060C30D /* ResultEkycHeader.xib */; };
 		115F31362A3C584B0060C30D /* ResultEkycHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115F31312A3C584B0060C30D /* ResultEkycHeader.swift */; };
 		115F31372A3C584B0060C30D /* ResultEkycViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115F31322A3C584B0060C30D /* ResultEkycViewController.swift */; };
+		BD2C237BEC505E9313E455A4 /* Pods_NFCSampleSwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBD0DC355B1E131449E3FE92 /* Pods_NFCSampleSwiftTests.framework */; };
+		E161C7A1FB95A8E4C603289C /* Pods_NFCSampleSwift_NFCSampleSwiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A011EE315E442961FDCE92 /* Pods_NFCSampleSwift_NFCSampleSwiftUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +62,7 @@
 
 /* Begin PBXFileReference section */
 		1139EB502A8F835100E8BD1A /* ICNFCCardReader.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = ICNFCCardReader.xcframework; sourceTree = "<group>"; };
-		1139EB512A8F835100E8BD1A /* OpenSSL.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:67RAULRX93:Marcin Krzyzanowski"; lastKnownFileType = wrapper.xcframework; path = OpenSSL.xcframework; sourceTree = "<group>"; };
+		1139EB512A8F835100E8BD1A /* OpenSSL.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = OpenSSL.xcframework; sourceTree = "<group>"; };
 		115F30A62A3C488F0060C30D /* NFCSampleSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NFCSampleSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		115F30A92A3C488F0060C30D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		115F30AD2A3C488F0060C30D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +81,9 @@
 		115F31302A3C584B0060C30D /* ResultEkycHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultEkycHeader.xib; sourceTree = "<group>"; };
 		115F31312A3C584B0060C30D /* ResultEkycHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultEkycHeader.swift; sourceTree = "<group>"; };
 		115F31322A3C584B0060C30D /* ResultEkycViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultEkycViewController.swift; sourceTree = "<group>"; };
+		2207244320456B710ED636D8 /* Pods_NFCSampleSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NFCSampleSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		89A011EE315E442961FDCE92 /* Pods_NFCSampleSwift_NFCSampleSwiftUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NFCSampleSwift_NFCSampleSwiftUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBD0DC355B1E131449E3FE92 /* Pods_NFCSampleSwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NFCSampleSwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD2C237BEC505E9313E455A4 /* Pods_NFCSampleSwiftTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E161C7A1FB95A8E4C603289C /* Pods_NFCSampleSwift_NFCSampleSwiftUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +122,7 @@
 				115F30BF2A3C48900060C30D /* NFCSampleSwiftTests */,
 				115F30C92A3C48900060C30D /* NFCSampleSwiftUITests */,
 				115F30A72A3C488F0060C30D /* Products */,
+				D1E1BC348100A2ED43B06BE2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -198,6 +206,16 @@
 			path = ResultEkycHeader;
 			sourceTree = "<group>";
 		};
+		D1E1BC348100A2ED43B06BE2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2207244320456B710ED636D8 /* Pods_NFCSampleSwift.framework */,
+				89A011EE315E442961FDCE92 /* Pods_NFCSampleSwift_NFCSampleSwiftUITests.framework */,
+				BBD0DC355B1E131449E3FE92 /* Pods_NFCSampleSwiftTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -223,6 +241,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 115F30D32A3C48900060C30D /* Build configuration list for PBXNativeTarget "NFCSampleSwiftTests" */;
 			buildPhases = (
+				EC17D24BF08AF3FDF7628ECE /* [CP] Check Pods Manifest.lock */,
 				115F30B82A3C48900060C30D /* Sources */,
 				115F30B92A3C48900060C30D /* Frameworks */,
 				115F30BA2A3C48900060C30D /* Resources */,
@@ -241,9 +260,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 115F30D62A3C48900060C30D /* Build configuration list for PBXNativeTarget "NFCSampleSwiftUITests" */;
 			buildPhases = (
+				096958898DA4EFFB71B5C49A /* [CP] Check Pods Manifest.lock */,
 				115F30C22A3C48900060C30D /* Sources */,
 				115F30C32A3C48900060C30D /* Frameworks */,
 				115F30C42A3C48900060C30D /* Resources */,
+				2C7879AC75504FF58C466E33 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -279,7 +300,7 @@
 				};
 			};
 			buildConfigurationList = 115F30A12A3C488F0060C30D /* Build configuration list for PBXProject "NFCSampleSwift" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -326,6 +347,70 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		096958898DA4EFFB71B5C49A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NFCSampleSwift-NFCSampleSwiftUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2C7879AC75504FF58C466E33 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NFCSampleSwift-NFCSampleSwiftUITests/Pods-NFCSampleSwift-NFCSampleSwiftUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NFCSampleSwift-NFCSampleSwiftUITests/Pods-NFCSampleSwift-NFCSampleSwiftUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NFCSampleSwift-NFCSampleSwiftUITests/Pods-NFCSampleSwift-NFCSampleSwiftUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EC17D24BF08AF3FDF7628ECE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NFCSampleSwiftTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		115F30A22A3C488F0060C30D /* Sources */ = {
